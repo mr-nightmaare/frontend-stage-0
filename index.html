@@ -17,7 +17,10 @@
                 <div class="title-container">
                     <label for="todo-complete" class="sr-only">Mark task as complete</label>
                     <input type="checkbox" id="todo-complete" class="todo-checkbox" data-testid="test-todo-complete-toggle">
-                    <h2 class="todo-title" id="todo-title-text" data-testid="test-todo-title">Configure Windows Subsystem for Linux (WSL) Environment</h2>
+                    <div class="title-wrapper">
+                        <h2 class="todo-title" id="todo-title-text" data-testid="test-todo-title">Configure Windows Subsystem for Linux (WSL) Environment</h2>
+                        <span class="priority-indicator" data-testid="test-todo-priority-indicator" aria-hidden="true"></span>
+                    </div>
                 </div>
 
                 <div class="todo-badges">
@@ -27,18 +30,61 @@
             </header>
 
             <div class="todo-body">
-                <p class="todo-description" id="todo-desc-text" data-testid="test-todo-description">
-                    Set up Ubuntu on Windows via WSL2. Ensure Docker Desktop is linked, update all Linux apt-get packages, configure zsh/oh-my-zsh for the terminal, and synchronize SSH keys to match native Linux development workflows seamlessly.
-                </p>
+                <div class="description-wrapper" id="description-wrapper">
+                    <div 
+                        class="todo-collapsible-section" 
+                        id="todo-collapsible-section"
+                        data-testid="test-todo-collapsible-section"
+                    >
+                        <p class="todo-description" id="todo-desc-text" data-testid="test-todo-description">
+                            Set up Ubuntu on Windows via WSL2. Ensure Docker Desktop is linked, update all Linux apt-get packages, configure zsh/oh-my-zsh for the terminal, and synchronize SSH keys to match native Linux development workflows seamlessly.
+                        </p>
+                    </div>
+                    <button 
+                        type="button" 
+                        class="expand-toggle" 
+                        data-testid="test-todo-expand-toggle"
+                        aria-expanded="false"
+                        aria-controls="todo-collapsible-section"
+                    >
+                        <span class="expand-text">Show more</span>
+                        <svg class="expand-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
 
                 <div class="todo-meta">
-                    <div class="due-date-container" aria-label="Due date information">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                        </svg>
-                        <time class="due-date" data-testid="test-todo-due-date" datetime="2026-03-01T18:00:00Z">Due Mar 1, 2026</time>
+                    <div class="meta-row">
+                        <div class="status-control-wrapper">
+                            <label for="status-control" class="sr-only">Task status</label>
+                            <select 
+                                id="status-control" 
+                                class="status-control" 
+                                data-testid="test-todo-status-control"
+                                aria-label="Select task status"
+                            >
+                                <option value="Pending">Pending</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Done">Done</option>
+                            </select>
+                        </div>
+                        <div class="due-date-container" aria-label="Due date information">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="icon" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            <time class="due-date" data-testid="test-todo-due-date" datetime="2026-03-01T18:00:00Z">Due Mar 1, 2026</time>
+                        </div>
                     </div>
-                    <time class="time-remaining" data-testid="test-todo-time-remaining" aria-live="polite">Due in 3 days</time>
+                    <div class="time-row">
+                        <span class="overdue-indicator" data-testid="test-todo-overdue-indicator" hidden>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            Overdue
+                        </span>
+                        <time class="time-remaining" data-testid="test-todo-time-remaining" aria-live="polite">Due in 3 days</time>
+                    </div>
                 </div>
 
                 <ul class="todo-tags" role="list" data-testid="test-todo-tags" aria-label="Task tags">
@@ -63,6 +109,67 @@
                     Delete
                 </button>
             </footer>
+
+            <div class="edit-form-container" data-testid="test-todo-edit-form" hidden>
+                <div class="edit-form-header">
+                    <h3>Edit Task</h3>
+                </div>
+                <form class="edit-form" id="edit-form">
+                    <div class="form-group">
+                        <label for="edit-title-input">Title</label>
+                        <input 
+                            type="text" 
+                            id="edit-title-input" 
+                            class="form-input" 
+                            data-testid="test-todo-edit-title-input"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-description-input">Description</label>
+                        <textarea 
+                            id="edit-description-input" 
+                            class="form-input form-textarea" 
+                            data-testid="test-todo-edit-description-input"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-priority-select">Priority</label>
+                            <select 
+                                id="edit-priority-select" 
+                                class="form-input form-select" 
+                                data-testid="test-todo-edit-priority-select"
+                            >
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-due-date-input">Due Date</label>
+                            <input 
+                                type="datetime-local" 
+                                id="edit-due-date-input" 
+                                class="form-input" 
+                                data-testid="test-todo-edit-due-date-input"
+                            >
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="action-btn cancel-btn" data-testid="test-todo-cancel-button">
+                            Cancel
+                        </button>
+                        <button type="submit" class="action-btn save-btn" data-testid="test-todo-save-button">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
         </article>
     </main>
     <script src="script.js"></script>
